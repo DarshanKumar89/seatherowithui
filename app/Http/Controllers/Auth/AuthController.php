@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\UserTheaters;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -93,10 +94,25 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        
+       $response= User::create([
+            'name'=>$data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'zip' => $data['zip'],
         ]);
+ 
+       foreach ($data['preferred_theater'] as $value) {
+       UserTheaters::create([
+            'user_id'=>$response->id,
+            'theater_id'=>$value
+
+        ]);
+           
+       }
+
+       return $response;
+      
+       
     }
 }

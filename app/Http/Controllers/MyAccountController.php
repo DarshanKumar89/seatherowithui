@@ -14,11 +14,14 @@ use Stripe\Stripe;
 use Stripe\Customer;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 Use Session;
 use Socialite;
 
 
 class MyAccountController extends Controller{
+
+    protected $redirectPath = '/';
 
     public function index()
     {
@@ -28,16 +31,21 @@ class MyAccountController extends Controller{
 
     public function facebook_signup()
     {
+
+
         //Session::set('fb_redirect_url',\URL::previous());
         if (Auth::check())
         {
+            
             Auth::logout();
            // Session::set('user_id', null);
             return redirect('facebook');
         }
         else
         {
-            return Socialite::with('facebook')->redirect();
+
+            //return Socialite::with('facebook')->redirect();
+            return Socialite::driver('facebook')->redirect();
         }
         //return Socialite::driver('facebook')->redirect();
     }
@@ -48,7 +56,7 @@ class MyAccountController extends Controller{
             $user =Socialite::with('facebook')->fields([
                 'first_name', 'last_name', 'email', 'gender', 'birthday'
             ])->user();
-            // print_r($user);
+            dd($user);
         } catch (Exception $e) {
             return redirect('home');
         }
@@ -81,6 +89,14 @@ class MyAccountController extends Controller{
             $redirect_url = Session::has('fb_redirect_url')?Session::get('fb_redirect_url'):'myaccount';
             return redirect($redirect_url);
         }
+    }
+
+
+     public function logoutSession(){
+
+        //dd("mithilesh Jha");
+        Auth::logout(); // log the user out of our application
+        return Redirect::to('/');
     }
 
 }

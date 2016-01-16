@@ -35,9 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'facebook' => [
-        'client_id' => '937027459667112',
-        'client_secret' => 'e3afa4e0f5da7a9a7bb033da1c0350ee',
-        'redirect' => 'http://ec2-52-11-113-21.us-west-2.compute.amazonaws.com/facebook_callback',
+        'client_id' => env('FACEBOOK_APP_ID'),
+        'client_secret' => env('FACEBOOK_APP_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT'),
     ],
 
 ];

@@ -42,13 +42,15 @@ class TheaterController extends Controller
     public function select()
     {
         $theaters = $this->getTheatersNearUserWithin(config('seathero.theaters.distance_in_miles'));
-
+        //dd($theaters);
+        
         $sorted = $this->sortTheatersByDistance($theaters);
 
+        
         $closestTheaters = array_slice(
             array_values($sorted), 0, config('seathero.theaters.max_number_to_display'));
         
-        $closestTheaters[0]->checked = true;
+        $closestTheaters[0]->checked = true; 
 
         return view('theater', compact('user', 'closestTheaters'));
     }
@@ -56,8 +58,14 @@ class TheaterController extends Controller
 
     public function getTheatersNearUserWithin($miles)
     {
+        //dd($this->lat,$this->lon,$miles);
+        //dd($miles);
         $range = $this->latLonRange($this->lat, $this->lon, $miles);
-
+        //dd($range);
+             // dd(Theater::where('lat', '>=', $range[0])
+             //              ->where('lat', '<=', $range[1])
+             //              ->where('lon', '>=', $range[2])
+             //              ->where('lon', '<=', $range[3])->toSql());
         return Theater::where('lat', '>=', $range[0])
                       ->where('lat', '<=', $range[1])
                       ->where('lon', '>=', $range[2])
@@ -68,6 +76,7 @@ class TheaterController extends Controller
 
     public function sortTheatersByDistance($theaters)
     {
+        $sorted=[];
         foreach ($theaters as $theater) {
             $distance = $this->latLonDistance($this->lat, $this->lon, $theater->lat, $theater->lon);
             $sorted["$distance"] = $theater;

@@ -2,10 +2,7 @@
 
 @section('content')
 
-        @include('errors_display')
-
-
-
+    @include('errors_display')
         <!-- Begin text carousel intro section -->
         <section id="home">
             <div class="container1" style="height:auto;">
@@ -190,6 +187,8 @@
         </section>
         <!-- End about section -->
 
+
+
         <!-- Begin about section -->
         <section id="signup" class="page text-center">
             <!-- Begin page header-->
@@ -236,8 +235,10 @@
                     <div class="col-md-offset-3">
                         <div class="col-md-8 col-sm-8 form-group">
                             <h5>Your preferred theaters : (You can select more than one)</h5>
-                            <select name="preferred_theater" class="form-control input-box1">
-                                <option value=""></option>
+                            <select name="preferred_theater[]" class=" selectpicker form-control input-box1"  multiple="multiple">
+                            @foreach($theaters as $theater)
+                                <option value="{{ $theater->theater_id }}">{{ $theater->name }}</option>
+                            @endforeach
                             </select>
                         </div>
                     </div>
@@ -252,5 +253,5 @@
             </div>
             <!-- End rotate box-1 -->
         </section>
-        <!-- End about section --
+        <!-- End about section -->
     @endsection

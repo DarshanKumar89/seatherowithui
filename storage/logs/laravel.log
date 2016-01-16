@@ -1,0 +1,39 @@
+[2016-01-16 13:21:30] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:28:06] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:35:54] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:35:55] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:35:56] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:35:58] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:35:59] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:36:00] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:36:01] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:36:01] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:42:26] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:42:38] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  
+[2016-01-16 13:42:56] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function set() on null' in /var/www/gitrepo/seathero_newui/vendor/laravel/socialite/src/Two/AbstractProvider.php:134
+Stack trace:
+#0 {main}  

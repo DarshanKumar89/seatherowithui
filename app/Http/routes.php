@@ -19,23 +19,31 @@ Route::group(['middleware' => ['web']], function () {
      * As a result the browser cannot be used to sign-up another user
      * until the original one is logged out.
      */ 
-    Route::get('/', function () {
-        if (Auth::check()) {
-            Auth::logout();
-        }
-        return view('index');
-    });
+    // Route::get('/', function () {
+    //     if (Auth::check()) {
+    //         Auth::logout();
+    //     }
+    //     return view('index');
+    // });
+
+    Route::get('/', 'HomeController@index');
+    
 
     /*
      * Page #1 : form processing
      */
     Route::post('signUp', 'Auth\AuthController@postRegister');
+
+    Route::get('facebook_signup', 'MyAccountController@facebook_signup');
+    Route::get('facebook_callback', 'MyAccountController@facebook_callback');
+
+
 });
 
 
+    
 
-
-Route::group(['middleware' => ['logged_in']], function() {
+    Route::group(['middleware' => ['logged_in']], function() {
     /* 
      * Page #2 : Theater selection based upon user's zipcode
      * Redirected here from the AuthController@postRegister, no processing needed.
@@ -81,6 +89,8 @@ Route::group(['middleware' => ['logged_in']], function() {
     Route::get('thanks', function() {
         return view('thanks');
     });
+
+    Route::get('logout', 'MyAccountController@logoutSession');
 });
 
 

@@ -23,6 +23,10 @@
       <link rel="stylesheet" href="{{ asset('/css/mobile.css') }}">
       <!-- Skin CSS -->
       <link rel="stylesheet" href="{{ asset('/css/fresh-lime.css') }}">
+      <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+
 
   </head>
   <body data-spy="scroll" data-target="#main-navbar">
@@ -50,12 +54,12 @@
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left:90px;">
                       <ul class="nav navbar-nav navbar-right">
                       @if (Auth::check())
-                              <li><a href="#">Hi, {{ Auth::user()->name }}</a></li>
-                              <li><a href="/logout" class="login-menu">LOGOUT</a></li>
+                              <li><a href="#">Hi, {{ Auth::user()->email }}</a></li>
+                              <li><a href="{{ URL::to('logout') }}" class="login-menu">LOGOUT</a></li>
                       @else
                           <li><a href="#how_it_works" class="page-scroll">HOW IT WORKS</a></li>
                           <li><a href="#get_3_months_free" class="page-scroll">GET 3 MONTHS FREE</a></li>
-                          <li><a href="#signup" class="page-scroll login-menu">LOGIN</a></li>
+                          <li><a id="login" href="#" class="login-menu" data-toggle="modal" data-target="#myModal">LOGIN</a></li>
                           <li><a href="#signup" class="page-scroll login-menu">SIGNUP</a></li>
                       @endif
                       </ul>
@@ -65,6 +69,62 @@
           </nav>
           <!-- End Navbar -->
       </header>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Login</h4>
+        </div>
+        <div class="modal-body">
+          
+           <form>
+
+              <div class="form-group">
+
+                  <label for="inputEmail">Email</label>
+
+                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+
+              </div>
+
+              <div class="form-group">
+
+                  <label for="inputPassword">Password</label>
+
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+
+              </div>
+
+              <div class="checkbox">
+
+                  <label><input type="checkbox"> Remember me</label>
+
+              </div>
+
+              <button type="submit" class="btn btn-primary">Login</button>
+
+          </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
 
             @yield('content')
 
@@ -96,3 +156,11 @@
 
   </body>
 </html>
+
+
+<style>
+modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+padding-right: 17px;
+}
+</style>

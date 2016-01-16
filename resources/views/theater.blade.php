@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    
+    dd($user,$closestTheaters);
     Thanks for signing up <b>{{ Auth::user()->email }}</b>!</br>
     The next step is to please select your preferred theater:
     <p>
