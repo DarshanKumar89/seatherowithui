@@ -44,8 +44,40 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
-    {
-        return parent::render($request, $e);
-    }
+    // public function render($request, Exception $e)
+    // {
+    //     return parent::render($request, $e);
+    // }
+
+
+    // public function render($request, Exception $e)
+    // {
+    //     if ($e instanceof ModelNotFoundException) {
+    //         $e = new NotFoundHttpException($e->getMessage(), $e);
+    //     }
+
+    //     if($this->isHttpException($e))
+    //             {
+    //              switch ($e->getStatusCode()) {
+    //               // not found
+    //               case 404:
+    //          return response()->view('errors.404',array(),404);
+    //               break;
+    //               // internal error
+    //               case '500':
+    //             return response()->view('errors.500',array(),500); 
+    //               break;
+         
+    //               default:
+    //                //return $this->renderHttpException($e);
+    //         return response()->view('errors.500',array(),500);
+    //               break;
+    //              }
+    //             }
+    //             else
+    //             {
+    //      return response()->view('errors.500',array(),500);
+                
+    //     }
+    // }
 }

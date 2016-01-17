@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" >
       <link href='http://fonts.googleapis.com/css?family=Roboto:400, 700, 500' rel='stylesheet' type='text/css'>
       <!-- Body font -->
       <link href='http://fonts.googleapis.com/css?family=Lato:300, 400' rel='stylesheet' type='text/css'>
@@ -72,7 +73,7 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="myModal" role="dialog" >
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -82,14 +83,15 @@
           <h4 class="modal-title">Login</h4>
         </div>
         <div class="modal-body">
-          
-           <form>
+          <div id="t_error"></div>
+           <form id="form-login">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
               <div class="form-group">
 
                   
 
-                  <input type="email" class="form-control input-box1" id="inputEmail" placeholder="Email">
+                  <input type="email" class="form-control input-box1" id="email-id" placeholder="Email">
 
               </div>
 
@@ -97,7 +99,7 @@
 
                   
 
-                  <input type="password" class="form-control input-box1" id="inputPassword" placeholder="Password">
+                  <input type="password" class="form-control input-box1" id="user-password" placeholder="Password">
 
               </div>
 
@@ -107,14 +109,9 @@
 
               </div> -->
 
-             
-
-
-
-
         </div>
         <div class="modal-footer">
-         <button type="submit" class="btn btn-primary">Login</button>
+         <button type="button" id="login-btn" class="btn btn-primary">Login</button>
 
           </form>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -158,10 +155,64 @@
   </body>
 </html>
 
+<script>
+$(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
 
-<style>
-modal-open .navbar-fixed-top,
-.modal-open .navbar-fixed-bottom {
-padding-right: 17px;
-}
-</style>
+$("#login-btn").click(function(){
+   var  email=$("#email-id").val();
+   var  password=$("#user-password").val();
+   uname=email.trim();
+   pass=password.trim();   
+   
+   if(uname=="" || uname==null)
+   {
+    $("#t_error").html("<div class='alert alert-danger'><span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span> Email Id must be filled out</div>");
+    return false;
+    
+   }
+   else if(pass=="" || pass==null)
+   {
+    $("#t_error").html("<div class='alert alert-danger'><span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span> Password must be filled out</div>");
+    return false;
+       
+   }
+   else{
+    
+    $.ajax({
+      type: "POST",
+      cache: false,
+      dataType: 'json',
+      url: "./login",
+      data: { "email": uname,"password":password },
+      beforeSend : function(){
+                   $("#t_error").html("<div><img src='img/processing.gif' alt=''/> Processing...</div>");
+              },
+      success: function(response) {
+      
+      if(response!='false')
+              {
+          $("#t_error").html("<div class='alert alert-success'><span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span> Successfull Loggedin.</div>");
+        }else
+              {
+          /*reload captcha & remove auto field value*/
+          $("#associate_uname").val('');
+          $("#associatepassword").val('');
+          $("#captcha3").val('');         
+          trainer_captcha();
+          
+                  $("#t_error").html("<div class='alert alert-danger'><span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span> Incorrect Id or Password or Captcha.</div>");
+              }
+      }
+    });
+     
+   }
+   
+});
+</script>
+

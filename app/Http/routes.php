@@ -112,3 +112,15 @@ Route::get('kevin-subscription-upgrade', 'PreLaunchSubscriptionController@upgrad
 
 Route::get('facebook_signup', 'MyAccountController@facebook_signup');
 Route::get('facebook_callback', 'MyAccountController@facebook_callback');
+
+
+Route::get('signin', array('as' => 'signin', 'uses' => 'AuthController@getSignin'));
+Route::post('signin', 'AuthController@postSignin');
+
+Route::post('login',function(){
+
+    if(Request::ajax()){
+        return Response::json(Request::all());
+    }
+});
+//Route::post('login','AuthController@login');

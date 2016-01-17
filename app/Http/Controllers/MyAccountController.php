@@ -13,6 +13,7 @@ use App\User;
 use Stripe\Stripe;
 use Stripe\Customer;
 use App\Http\Requests;
+use App\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 Use Session;
@@ -99,4 +100,6 @@ class MyAccountController extends Controller{
         return Redirect::to('/');
     }
 
+
+       
 }

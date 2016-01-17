@@ -6,6 +6,8 @@ use App\User;
 use App\UserTheaters;
 use Validator;
 use Session;
+use Input;
+use Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -120,4 +122,95 @@ class AuthController extends Controller
       
        
     }
+
+
+
+    public function login() {
+
+                if(Request::ajax()) {
+    
+                $input = array(
+                      'email' => Input::get('email'),
+                      'password' => Input::get('password'),
+                    );
+
+                return json_encode($input);
+
+                }
+                $rules = array (
+                  'email' => 'required|email',
+                  'password' => 'required'
+                );
+
+                $validator = Validator::make($input, $rules);  
+
+                if ( $validator->fails() )
+                {
+                  if(Request::ajax())
+                  {
+                    return Response::json(['success' => false, 'errors' => $validator->getMessageBag()->toArray()]);
+                  } else{
+                    return Redirect::back()->withInput()->withErrors($validator);
+                  }
+
+                }
+    } 
+                // else {
+                // return json_encode($input);
+
+
+
+                // // Getting all post data
+                // $data = Input::all();
+                // var_dump($data);
+                // // Applying validation rules.
+
+
+              // print_r($data);
+              //   $rules = array(
+              //       'email' => 'required|email',
+              //       'password' => 'required|min:6',
+              //        );
+              //   $validator = Validator::make($data, $rules);
+              //   if ($validator->fails()){
+              //     // If validation falis redirect back to login.
+              //     return Redirect::to('/login')->withInput(Input::except('password'))->withErrors($validator);
+              //   }
+              //   else {
+              //     $userdata = array(
+              //           'email' => Input::get('email'),
+              //           'password' => Input::get('password')
+              //         );
+              //     // doing login.
+              //     if (Auth::validate($userdata)) {
+              //       if (Auth::attempt($userdata)) {
+              //         return Redirect::intended('/');
+              //       }
+              //     } 
+              //     else {
+              //       // if any error send back with message.
+              //       Session::flash('error', 'Something went wrong'); 
+              //       return Redirect::to('login');
+              //     }
+              //   }
+
+
+    //             $auth = false;
+    // $credentials = $request->only('email', 'password');
+
+    // if (Auth::attempt($credentials, $request->has('remember'))) {
+    //     $auth = true; // Success
+    // }
+
+    // if ($request->ajax()) {
+    //     return response()->json([
+    //         'auth' => $auth,
+    //         'intended' => URL::previous()
+    //     ]);
+    // } else {
+    //     return redirect()->intended(URL::route('dashboard'));
+    // }
+    // return redirect(URL::route('login_page'));
+    // }
+ 
 }

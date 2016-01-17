@@ -1515,7 +1515,7 @@ a.facebook img:hover {
     padding-top: 50px;
    /* margin-top: 20px;*/
 }
-.custome-error {
+/*.custome-error {
     top: 50%;
     left: 10%;
     overflow: hidden;
@@ -1523,7 +1523,7 @@ a.facebook img:hover {
     width: 80%;
     opacity: 0.9;
     z-index: 1050;
-}
+}*/
 #theater{
 	margin-top: 153px;
     min-height: 375px;
@@ -1536,4 +1536,10 @@ a.facebook img:hover {
 #friends{
 	margin-top:150px;
 	min-height:375px;
+}
+
+
+modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+padding-right: 17px;
 }
