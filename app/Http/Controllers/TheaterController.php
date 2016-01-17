@@ -8,6 +8,7 @@ use DB;
 use Auth;
 use App\Theater;
 use App\Http\Requests;
+use Session;
 use App\Http\Controllers\Controller;
 
 class TheaterController extends Controller
@@ -41,16 +42,22 @@ class TheaterController extends Controller
 
     public function select()
     {
+        
         $theaters = $this->getTheatersNearUserWithin(config('seathero.theaters.distance_in_miles'));
-        //dd($theaters);
-        
-        $sorted = $this->sortTheatersByDistance($theaters);
+        if(count($theaters->toarray())>0){
 
-        
-        $closestTheaters = array_slice(
+            $sorted = $this->sortTheatersByDistance($theaters);
+            $closestTheaters = array_slice(
             array_values($sorted), 0, config('seathero.theaters.max_number_to_display'));
+            $closestTheaters[0]->checked = true; 
+
+        }
+        else{
+            
+           $closestTheaters=[];
+        }
         
-        $closestTheaters[0]->checked = true; 
+        
 
         return view('theater', compact('user', 'closestTheaters'));
     }
@@ -58,14 +65,9 @@ class TheaterController extends Controller
 
     public function getTheatersNearUserWithin($miles)
     {
-        //dd($this->lat,$this->lon,$miles);
-        //dd($miles);
+     
         $range = $this->latLonRange($this->lat, $this->lon, $miles);
-        //dd($range);
-             // dd(Theater::where('lat', '>=', $range[0])
-             //              ->where('lat', '<=', $range[1])
-             //              ->where('lon', '>=', $range[2])
-             //              ->where('lon', '<=', $range[3])->toSql());
+        
         return Theater::where('lat', '>=', $range[0])
                       ->where('lat', '<=', $range[1])
                       ->where('lon', '>=', $range[2])

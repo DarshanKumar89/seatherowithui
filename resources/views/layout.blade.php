@@ -54,7 +54,7 @@
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left:90px;">
                       <ul class="nav navbar-nav navbar-right">
                       @if (Auth::check())
-                              <li><a href="#">Hi, {{ Auth::user()->email }}</a></li>
+                              <li><a href="#">Hi, {{ Auth::user()->name }}</a></li>
                               <li><a href="{{ URL::to('logout') }}" class="login-menu">LOGOUT</a></li>
                       @else
                           <li><a href="#how_it_works" class="page-scroll">HOW IT WORKS</a></li>

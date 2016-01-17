@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('errors_display')
+    
         <!-- Begin text carousel intro section -->
         <section id="home">
             <div class="container1" style="height:auto;">
@@ -210,6 +210,7 @@
             <!-- Begin rotate box-1 -->
             <div class="rotate-box-2-wrapper">
                 <div class="container">
+                @include('errors_display')
                 <form method="post" class="form-horizontal" enctype="multipart/form-data" novalidate="novalidate" action="signUp">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="row  col-md-offset-3">

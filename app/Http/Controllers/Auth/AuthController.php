@@ -101,7 +101,8 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
             'zip' => $data['zip'],
         ]);
- 
+
+ if(isset($data['preferred_theater'])){
        foreach ($data['preferred_theater'] as $value) {
        UserTheaters::create([
             'user_id'=>$response->id,
@@ -110,6 +111,8 @@ class AuthController extends Controller
         ]);
            
        }
+ }
+    
 
        return $response;
       

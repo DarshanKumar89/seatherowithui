@@ -1515,3 +1515,16 @@ a.facebook img:hover {
     padding-top: 50px;
     margin-top: 20px;
 }
+.custome-error {
+    top: 50%;
+    left: 10%;
+    overflow: hidden;
+    position: fixed;
+    width: 80%;
+    opacity: 0.9;
+    z-index: 1050;
+}
+#theater{
+	margin-top: 153px;
+    min-height: 375px;
+}
