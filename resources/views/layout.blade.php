@@ -87,35 +87,36 @@
 
               <div class="form-group">
 
-                  <label for="inputEmail">Email</label>
+                  
 
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                  <input type="email" class="form-control input-box1" id="inputEmail" placeholder="Email">
 
               </div>
 
               <div class="form-group">
 
-                  <label for="inputPassword">Password</label>
+                  
 
-                  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                  <input type="password" class="form-control input-box1" id="inputPassword" placeholder="Password">
 
               </div>
 
-              <div class="checkbox">
+              <!-- <div class="checkbox">
 
                   <label><input type="checkbox"> Remember me</label>
 
-              </div>
+              </div> -->
 
-              <button type="submit" class="btn btn-primary">Login</button>
-
-          </form>
+             
 
 
 
 
         </div>
         <div class="modal-footer">
+         <button type="submit" class="btn btn-primary">Login</button>
+
+          </form>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

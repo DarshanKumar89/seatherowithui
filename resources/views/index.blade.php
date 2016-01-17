@@ -77,10 +77,13 @@
                             </a>
                         </div>
                     </div>
+                    @if(!Auth::check())
                     <!-- /.row -->
                     <div class="row">
+
                         <a href="#signup" class="btn btn-lg btn-warning2 page-scroll col-sm-4 col-sm-offset-4">Signup</a>
                     </div>
+                    @endif
                     <div class="clearfix"></div>
                 </div>
                 <!-- /.container -->
@@ -176,9 +179,11 @@
                         </div>
                     </div>
                     <!-- /.row -->
+                    @if(!Auth::check())
                     <div class="row">
                         <a href="#signup" class="btn btn-lg btn-warning2 page-scroll col-sm-4 col-sm-offset-4">Signup</a>
                     </div>
+                    @endif
                     <div class="clearfix"></div>
                 </div>
                 <!-- /.container -->
@@ -187,7 +192,7 @@
         </section>
         <!-- End about section -->
 
-
+        @if(!Auth::check())
 
         <!-- Begin about section -->
         <section id="signup" class="page text-center">
@@ -244,7 +249,7 @@
                         </div>
                     </div>
                     <!-- /.row -->
-                    <div class="row">
+                    <div class="row" id="signupbutton">
                         <button class="btn btn-lg btn-warning2 col-sm-4 col-sm-offset-4">Create Account</button>
                     </div>
                     <div class="clearfix"></div>
@@ -255,4 +260,5 @@
             <!-- End rotate box-1 -->
         </section>
         <!-- End about section -->
+        @endif
     @endsection

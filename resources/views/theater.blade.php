@@ -6,9 +6,10 @@
             <div class="container" style="height:auto;">
                 <div class="row">
                     <p>Thanks for signing up <b>{{ Auth::user()->email }}</b>!</p></br>
-                    <p>The next step is to please select your preferred theater:</p>
-
+                    
+                    <!--if theaters are comming -->
                     <?php if (count($closestTheaters)>0) {  ?>
+                    <p>The next step is to please select your preferred theater:</p>
                         <form method="POST" action="theater">
                             {!! csrf_field() !!}
                             @foreach($closestTheaters as $theater)
@@ -29,7 +30,12 @@
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
-                    <?php } ?>
+                    <?php } 
+                    else{  ?>
+                            <h1> We Don't provide our services in your area. </h1>
+
+                    <?php } 
+                    ?>
                 </div>
             </div>
     </section>

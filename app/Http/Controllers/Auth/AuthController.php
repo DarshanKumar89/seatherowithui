@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\UserTheaters;
 use Validator;
+use Session;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -102,14 +103,15 @@ class AuthController extends Controller
             'zip' => $data['zip'],
         ]);
 
- if(isset($data['preferred_theater'])){
+
+        if(isset($data['preferred_theater'])){
        foreach ($data['preferred_theater'] as $value) {
-       UserTheaters::create([
-            'user_id'=>$response->id,
-            'theater_id'=>$value
+            UserTheaters::create([
+                'user_id'=>$response->id,
+                'theater_id'=>$value
 
         ]);
-           
+           Session::set('preferred_theater',$data['preferred_theater']);
        }
  }
     

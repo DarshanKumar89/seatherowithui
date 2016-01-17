@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Theater;
+use App\ShowtimeTheaters;
 use App\Http\Requests;
 use Session;
 use App\Http\Controllers\Controller;
@@ -39,10 +40,22 @@ class TheaterController extends Controller
         return redirect('/friends');
     }
 
-
-    public function select()
+    public function getTheaterDetail($theaterid)
     {
+
+            $theaterdetails=ShowtimeTheaters::findOrFail($theaterid);
+            return $theaterdetails;
+
+    }
+
+
+
+    public function select(Request $request)
+    {
+        //dd($request);
+        //dd(Session::all());
         
+
         $theaters = $this->getTheatersNearUserWithin(config('seathero.theaters.distance_in_miles'));
         if(count($theaters->toarray())>0){
 
@@ -53,13 +66,22 @@ class TheaterController extends Controller
 
         }
         else{
-            
+
            $closestTheaters=[];
         }
         
-        
+        // if user already has been selected the preferred theater at signup time it will go directly to friends page
+        // else it will go to theater page and then will go on friends page
+        if(count(Session::get('preferred_theater'))>0)
+        {
+            $theaterdetails=$this->getTheaterDetail(Session::get('preferred_theater')[0]);
+            return view('friends')->with('theater',$theaterdetails);
+        }
+        {
+            return view('theater', compact('user', 'closestTheaters'));  
+        }
 
-        return view('theater', compact('user', 'closestTheaters'));
+        
     }
 
 
