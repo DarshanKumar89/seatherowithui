@@ -10,7 +10,9 @@ return [
          * Stripe dashboard when creating this subscription plan on the Stripe side.
          */
         'pre_launch_trial_days' => 90,
-        'pre_launch_sign_up_price' => 500           // in cents as per Stripe's docs
+        'pre_launch_sign_up_price' => 500,           // in cents as per Stripe's docs
+		'secret_key'      => 'sk_test_BQokikJOvBiI2HlWgH4olfQ2',
+		'publishable_key' => 'pk_test_6pRNASCoBOKtIshFeQd4XMUh'
     ],
 
     'theaters' => [

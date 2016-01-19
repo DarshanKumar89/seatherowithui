@@ -107,6 +107,9 @@ Route::post('payment/webhook',
 );
 
 
+    Route::any('bill', array('as' => 'bill', 'uses' => 'PaymentController@bill'));
+
+    Route::post('payment', array('as' => 'payment', 'uses' => 'PaymentController@pay'));
 
 Route::get('kevin-subscription-upgrade', 'PreLaunchSubscriptionController@upgrade');
 
