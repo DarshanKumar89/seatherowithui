@@ -28,6 +28,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 
+<!--
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	  -->
+	  <script src="{{ asset('/lib/jquery-2.2.0.min.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Plugins JS -->
+          <script src="{{ asset('/lib/owl-carousel/js/owl.carousel.min.js')}}"></script>
+          <script src="{{ asset('/lib/stellar/js/jquery.stellar.min.js') }}"></script>
+          <script src="{{ asset('/lib/animations/js/wow.min.js') }}"></script>
+          <script src="{{ asset('/lib/waypoints.min.js') }}"></script>
+          <script src="{{ asset('/lib/isotope.pkgd.min.js') }}"></script>
+          <script src="{{ asset('/lib/classie.js') }}"></script>
+          <script src="{{ asset('/lib/jquery.easing.min.js') }}"></script>
+          <script src="{{ asset('/lib/jquery.counterup.min.js') }}"></script>
+          <script src="{{ asset('/lib/smoothscroll.js') }}"></script>
+
+          <!-- Theme JS -->
+          <script src="{{ asset('/js/theme.js') }}"></script>
 
   </head>
   <body data-spy="scroll" data-target="#main-navbar">
@@ -134,22 +152,6 @@
           <div class="col-lg-6" align="right" style="padding-top:30px"> Terms Of Use | Copy Right SeatHero 2016</div>
       </div>
   </div>
-
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- Plugins JS -->
-          <script src="{{ asset('/lib/owl-carousel/js/owl.carousel.min.js')}}"></script>
-          <script src="{{ asset('/lib/stellar/js/jquery.stellar.min.js') }}"></script>
-          <script src="{{ asset('/lib/animations/js/wow.min.js') }}"></script>
-          <script src="{{ asset('/lib/waypoints.min.js') }}"></script>
-          <script src="{{ asset('/lib/isotope.pkgd.min.js') }}"></script>
-          <script src="{{ asset('/lib/classie.js') }}"></script>
-          <script src="{{ asset('/lib/jquery.easing.min.js') }}"></script>
-          <script src="{{ asset('/lib/jquery.counterup.min.js') }}"></script>
-          <script src="{{ asset('/lib/smoothscroll.js') }}"></script>
-
-          <!-- Theme JS -->
-          <script src="{{ asset('/js/theme.js') }}"></script>
 
 
   </body>

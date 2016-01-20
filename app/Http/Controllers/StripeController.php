@@ -3,24 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 use Auth;
 use Stripe\Token;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Stripe\Customer;
+use Stripe\Error\Card;
+use Stripe\Error\ApiConnection;
+use Stripe\Error\InvalidRequest;
+use Stripe\Error\Api;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Log;
+
+
 
 class StripeController extends Controller
 {
+
     public function preLaunch(Request $request) 
     {
-        $this->oneTimePayment(
+		$secret_key = config('seathero.stripe.secret_key');
+		Stripe::setApiKey($secret_key);
+		return view('billing');
+	
+	}
+	
+    public function processPreLaunchPayment(Request $request) 
+    {
+		$secret_key = config('seathero.stripe.secret_key');
+		Stripe::setApiKey($secret_key);
+		$this->oneTimePayment(
             $request->stripeToken, 
             config('seathero.stripe.pre_launch_sign_up_price')
         );
-
         return view('thanks');
     }
 
@@ -37,7 +55,7 @@ class StripeController extends Controller
 
     protected function collectOneTimePayment($token, $amount) 
     {
-        Stripe::setApiKey(config('services.stripe.secret'));
+        //Stripe::setApiKey(config('services.stripe.secret'));
 
         $user = Auth::user();
 

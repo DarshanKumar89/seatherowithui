@@ -1,139 +1,96 @@
 <?php
-
-
 $publishable_key = config('seathero.stripe.publishable_key');
 $amount = 300;
-
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Buy This Thing</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-	<script type="text/javascript">Stripe.setPublishableKey("<?php echo $publishable_key; ?>");</script>
-	<script type="text/javascript">
-function reportError(msg) {
-	// Show the error in the form:
-	$('#payment-errors').text(msg).addClass('alert alert-error');
-	// re-enable the submit button:
-	$('#submitBtn').prop('disabled', false);
-	return false;
-}
 
-// Assumes jQuery is loaded!
-// Watch for the document to be ready:
-$(document).ready(function() {
+@extends('layout')
 
-	// Watch for a form submission:
-	$("#payment-form").submit(function(event) {
+@section('content')
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">Stripe.setPublishableKey("<?php echo $publishable_key; ?>");</script>
+<script type="text/javascript" src="{{ asset('/js/payment_util.js') }}"></script>
 
-		// Flag variable:
-		var error = false;
+<div class="row bg3" >
+	<div class="col-lg-2"></div>
+	<div class="col-lg-8 text-center" >
+		<div class="container" style="height:auto;">
+			<h2 class=""></h2>
+			</br>
+			</br>
+			</br>
+			</br>
+		</div>
+		</br>
+		</br>
 
-		// disable the submit button to prevent repeated clicks:
-		$('#submitBtn').attr("disabled", "disabled");
+		<div class="panel panel-default credit-card-box ">
+			<div class="panel-heading display-table" >
+				<div class="row" >
+					<div class="col-lg-6" align="left" style="margin-top:10px" >
+						<h5>Payment Details</h5>
+					</div>
+					<div class="col-lg-6" >                            
+						<img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+					</div>
+				</div>                    
+			</div>
+			<div class="panel-body">
+				
+				<form role="form" id="payment-form" method="post" action="<?php echo route('processPreLaunchPayment'); ?>">
+				{!! csrf_field() !!}
+					<?php // Show PHP errors, if they exist:
+					if(isset($errors) && !empty($errors) && is_array($errors)){
+						echo '<div class="alert alert-error"><h4>Error!</h4>The following error(s) occurred:<ul>';
+						foreach($errors as $e){
+							echo "<li>$e</li>";
+						}
+						echo '</ul></div>';
+					}?>
+					<div id="payment-errors"></div>
 
-		// Get the values:
-		var ccNum = $('.card-number').val(), cvcNum = $('.card-cvc').val(), expMonth = $('.card-expiry-month').val(), expYear = $('.card-expiry-year').val();
-
-		// Validate the number:
-		if (!Stripe.card.validateCardNumber(ccNum)) {
-			error = true;
-			reportError('The credit card number appears to be invalid.');
-		}
-
-		// Validate the CVC:
-		if (!Stripe.card.validateCVC(cvcNum)) {
-			error = true;
-			reportError('The CVC number appears to be invalid.');
-		}
-
-		// Validate the expiration:
-		if (!Stripe.card.validateExpiry(expMonth, expYear)) {
-			error = true;
-			reportError('The expiration date appears to be invalid.');
-		}
-
-		// Validate other form elements, if needed!
-
-		// Check for errors:
-		if (!error) {
-
-			// Get the Stripe token:
-			Stripe.card.createToken({
-				number: ccNum,
-				cvc: cvcNum,
-				exp_month: expMonth,
-				exp_year: expYear
-			}, stripeResponseHandler);
-
-		}
-
-		// Prevent the form from submitting:
-		return false;
-
-	}); // Form submission
-
-}); // Document ready.
-
-// Function handles the Stripe response:
-function stripeResponseHandler(status, response) {
-
-	// Check for an error:
-	if (response.error) {
-
-		reportError(response.error.message);
-
-	} else { // No errors, submit the form:
-
-	  var f = $("#payment-form");
-
-	  // Token contains id, last4, and card type:
-	  var token = response['id'];
-
-	  // Insert the token into the form so it gets submitted to the server
-	  f.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
-
-	  // Submit the form:
-	  f.get(0).submit();
-
-	}
-
-} // End of stripeResponseHandler() function.	
-	</script>
-</head>
-<body>
-
-		<form id="payment-form" method="post" action="<?php echo route('payment'); ?>">
-		<?php // Show PHP errors, if they exist:
-		if (isset($errors) && !empty($errors) && is_array($errors)) {
-			echo '<div class="alert alert-error"><h4>Error!</h4>The following error(s) occurred:<ul>';
-			foreach ($errors as $e) {
-				echo "<li>$e</li>";
-			}
-			echo '</ul></div>';
-		}?>
-		<div id="payment-errors"></div>
-		<div class="help-block">You can pay using: Mastercard, Visa, American Express, JCB, Discover, and Diners Club.</div>
-
-<div>
-		<label>Card Number</label>
-		<input type="text" size="20" autocomplete="off" class="card-number input-medium">
-		<span class="help-block">Enter the number without spaces or hyphens.</span>
-</div><div>
-		<label>CVC</label>
-		<input type="text" size="4" autocomplete="off" class="card-cvc input-mini">
-</div><div>
-		<label>Expiration (MM/YYYY)</label>
-		<input type="text" size="2" class="card-expiry-month input-mini">
-		<span> / </span>
-		<input type="text" size="4" class="card-expiry-year input-mini">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group">
+								<div class="input-group">
+<input type="text" size="20" autocomplete="off" class="card-number form-control" placeholder="Valid Card Number">
+									<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+								</div>
+							</div>                            
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-7 col-md-7">
+							<div class="form-group">
+		<input type="text" size="7" maxlength="7" class="card-expiry form-control" placeholder="EXPIRATION - MM / YYYY">
+							</div>
+						</div>
+						<div class="col-xs-5 col-md-5 pull-right">
+							<div class="form-group">
+		<input type="text" size="4" autocomplete="off" class="card-cvc form-control" placeholder="CVC Code">                                   
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group">
+                                    
+								<input type="text" class="form-control" name="Coupon Code" placeholder="Coupon Code" />
+							</div>
+						</div>                        
+					</div>
+					<div class="row">
+						<div class="col-xs-12" align="center"  >
+							<button class="btn btn-success btn-lg " type="submit">Start Subscription</button>
+						</div>
+					</div>
+					<div class="row" style="display:none;">
+						<div class="col-xs-12">
+							<p class="payment-errors"></p>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>       
+	</div>
 </div>
-		<button type="submit" class="btn" id="submitBtn">Pay</button>
-</form> 
-
-
-</body>
-</html>
+@endsection

@@ -72,16 +72,16 @@ Route::group(['middleware' => ['web']], function () {
 
     /*
      * Page #4 : Pre-launch offer
-     */ 
+      
     Route::get('pre-launch', function() {
-        $friends = Auth::user()->referrals();
-        return view('stripe-demo', compact('friends'));
+        //$friends = Auth::user()->referrals();
+        //return view('stripe-demo', compact('friends'));
     });
-
+	*/
     /*
      * Page #5 : Pre-launch subscription processing
      */ 
-    Route::post('payment/pre-launch', 'StripeController@preLaunch');
+//    Route::post('payment/pre-launch', 'StripeController@preLaunch');
 
     /*
      * Page #6 : Thanks for signing up
@@ -89,6 +89,17 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('thanks', function() {
         return view('thanks');
     });
+	
+	/*
+	Page #4 : Pre-launch offer
+	*/
+    Route::any('pre-launch', array('as' => 'preLaunch', 'uses' => 'StripeController@preLaunch'));
+    /*
+     * Page #5 : Pre-launch subscription processing
+     */ 
+    Route::post('pre-launch/payment', array('as' => 'processPreLaunchPayment', 'uses' => 'StripeController@processPreLaunchPayment'));
+	
+	
 
     Route::get('logout', 'MyAccountController@logoutSession');
 });
@@ -111,6 +122,11 @@ Route::post('payment/webhook',
 
     Route::post('payment', array('as' => 'payment', 'uses' => 'PaymentController@pay'));
 
+	Route::get('paytest', function() {
+        return view('payment');
+    });
+
+	
 Route::get('kevin-subscription-upgrade', 'PreLaunchSubscriptionController@upgrade');
 
 Route::get('facebook_signup', 'MyAccountController@facebook_signup');
